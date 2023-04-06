@@ -85,8 +85,17 @@ public:
             cout << "Stack underflow" << endl;
             return -1;
         }
-        int temp = stack->head->data;
-        stack->head = stack->head->Next;
+        if(stack->head->Next==NULL){
+            int temp = stack->head->data;
+            stack->prepend(NULL);
+            return temp;
+        }
+        Node* current = stack->head;
+        while(current->Next->Next!=NULL){
+            current=current->Next;
+        }
+        int temp = current->Next->data;
+        current->Next = current->Next->Next;
         return temp;
     }
     int peek() {
@@ -94,7 +103,13 @@ public:
             cout << "Stack is empty" << endl;
             return -1;
         }
-        return stack->head->data;
+        Node* current = stack->head;
+        while(current->Next->Next!=NULL){
+            current=current->Next;
+        }
+        int temp = current->Next->data;
+        return temp;
+        
     }
     bool isEmpty() {
         return stack->head==NULL;
@@ -102,7 +117,7 @@ public:
 };
 int main(){
     Stack s;
-    s.push(6);
+    s.push(8);
     s.push(16);
     s.push(26);
     s.push(36);
