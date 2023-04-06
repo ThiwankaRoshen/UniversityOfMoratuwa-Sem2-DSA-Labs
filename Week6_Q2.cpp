@@ -1,4 +1,6 @@
 #include<iostream>
+#include <chrono>
+
 using namespace std;
 
 class Node {
@@ -109,21 +111,45 @@ public:
         }
         int temp = current->Next->data;
         return temp;
-        
+
+    }
+    void Display(){
+        stack->printval();
     }
     bool isEmpty() {
         return stack->head==NULL;
     }
 };
 int main(){
+    auto start_time = std::chrono::high_resolution_clock::now();
     Stack s;
     s.push(8);
-    s.push(16);
-    s.push(26);
-    s.push(36);
+    s.push(10);
+    s.push(5);
+    s.push(11);
+    s.push(15);
+    s.push(23);
+    s.push(6);
+    s.push(18);
+    s.push(20);
+    s.push(17);
+    s.Display();
     cout << s.pop() << endl;
     cout << s.pop() << endl;
-    cout << s.peek() << endl;
-    cout << s.isEmpty() << endl; //
+    cout << s.pop() << endl;
+    cout << s.pop() << endl;
+    cout << s.pop() << endl;
+    s.Display();
+    s.push(4);
+    s.push(30);
+    s.push(3);
+    s.push(1);
+    cout << s.pop() << endl;
+    cout << s.pop() << endl;
+    s.Display();
+    auto end_time = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time);
+
+    std::cout << "Execution time: " << duration.count() << " microseconds\n";
     return 0;
 }
